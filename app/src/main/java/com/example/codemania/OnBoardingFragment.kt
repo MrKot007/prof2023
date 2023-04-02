@@ -14,6 +14,7 @@ class OnBoardingFragment(val text: String, val img: Int) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        bindingFragment = FragmentBoardingBinding.inflate(layoutInflater)
         return bindingFragment.root
     }
 
