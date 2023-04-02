@@ -15,7 +15,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/nextScreen"
+        app:layout_constraintBottom_toTopOf="@+id/enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/tabselector"
@@ -27,7 +27,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/nextScreen"
+        android:id="@+id/enter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"

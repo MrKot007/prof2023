@@ -34,7 +34,8 @@ class OnBoardingActivity : AppCompatActivity() {
                 binding.nextScreenText.text = "Начать"
             }
             if (binding.boardingPager.currentItem == 2) {
-                //startActivity(Intent(this@OnBoardingActivity, LogInActivity::class.java))
+                startActivity(Intent(this@OnBoardingActivity, LogInActivity::class.java))
+                finish()
             }
             binding.boardingPager.setCurrentItem(binding.boardingPager.currentItem + 1)
         }
