@@ -2,6 +2,8 @@ package com.example.codemania
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.example.codemania.Connection.retrofit
 import com.google.gson.Gson
 import retrofit2.Call
@@ -26,11 +28,13 @@ fun <T> Call<T>.push(onGetData: OnGetData<T>, context: Context) {
                 }else{
                     onGetData.onError("body null")
                 }
+            }else{
+                Toast.makeText(context, "Ошибка ${response.code()}", Toast.LENGTH_LONG).show()
             }
         }
 
         override fun onFailure(call: Call<T>, t: Throwable) {
-
+            Log.e("New error", t.message.toString())
         }
 
     })

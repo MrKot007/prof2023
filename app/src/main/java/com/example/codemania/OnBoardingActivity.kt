@@ -8,11 +8,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class OnBoardingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityOnBoardingBinding
+    private lateinit var bbinding: ActivityOnBoardingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        bbinding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(bbinding.root)
         val fragments: List<Pair<String, Int>> = listOf(
             Pair("Без теории, только практика\n" +
                     "Вы не платите за лекции и теоретический материал, ведь все\n"+" это можно найти в интернете бесплатно", R.drawable.post1),
@@ -21,23 +21,23 @@ class OnBoardingActivity : AppCompatActivity() {
             Pair("Обучение онлайн из любой точки мира\n" +
                     "Наше обучение изначально создавалось как дистанционное", R.drawable.post3)
         )
-        binding.boardingPager.adapter = OnBoardingAdapter(this@OnBoardingActivity, fragments)
-        binding.boardingPager.isUserInputEnabled = false
-        TabLayoutMediator(binding.tabs, binding.boardingPager) {
+        bbinding.boardingPager.adapter = OnBoardingAdapter(this@OnBoardingActivity, fragments)
+        bbinding.boardingPager.isUserInputEnabled = false
+        TabLayoutMediator(bbinding.tabs, bbinding.boardingPager) {
             tab, pos ->
             run {
                 tab.view.isClickable = false
             }
         }.attach()
-        binding.nextScreen.setOnClickListener {
-            if (binding.boardingPager.currentItem == 1) {
-                binding.nextScreenText.text = "Начать"
+        bbinding.enter.setOnClickListener {
+            if (bbinding.boardingPager.currentItem == 1) {
+                bbinding.nextScreenText.text = "Начать"
             }
-            if (binding.boardingPager.currentItem == 2) {
+            if (bbinding.boardingPager.currentItem == 2) {
                 startActivity(Intent(this@OnBoardingActivity, LogInActivity::class.java))
                 finish()
             }
-            binding.boardingPager.setCurrentItem(binding.boardingPager.currentItem + 1)
+            bbinding.boardingPager.setCurrentItem(bbinding.boardingPager.currentItem + 1)
         }
 
     }
