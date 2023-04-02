@@ -1,8 +1,11 @@
 package com.example.codemania
 
 import android.content.Intent
+import android.icu.lang.UCharacter.VerticalOrientation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.codemania.databinding.ActivityOnBoardingBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -23,6 +26,7 @@ class OnBoardingActivity : AppCompatActivity() {
         )
         bbinding.boardingPager.adapter = OnBoardingAdapter(this@OnBoardingActivity, fragments)
         bbinding.boardingPager.isUserInputEnabled = false
+        bbinding.boardingPager.orientation = ViewPager2.ORIENTATION_VERTICAL
         TabLayoutMediator(bbinding.tabs, bbinding.boardingPager) {
             tab, pos ->
             run {
