@@ -24,3 +24,6 @@ data class ModelIdentity(
     val token: String,
     val user: ModelUser
 )
+data class ModelToken(
+    val token: String
+)
