@@ -40,7 +40,7 @@ class LogInActivity : AppCompatActivity() {
                     Info.firstname = data.user.firstname
                     Info.lastname = data.user.lastname
                     Info.patronymic = data.user.patronymic
-                    Info.avatar = data.user.avatar
+                    //Info.avatar = data.user.avatar!!
                     getSharedPreferences("savetoken", Context.MODE_PRIVATE).edit().putString("token", data.token).apply()
                     getSharedPreferences("savemail", Context.MODE_PRIVATE).edit().putString("mail", email).apply()
                     getSharedPreferences("savepassword", Context.MODE_PRIVATE).edit().putString("pass", pass).apply()

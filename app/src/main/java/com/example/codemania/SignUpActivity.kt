@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
                     Info.firstname = data.user.firstname
                     Info.lastname = data.user.lastname
                     Info.patronymic = data.user.patronymic
-                    Info.avatar = data.user.avatar
+                    //Info.avatar = data.user.avatar!!
                     getSharedPreferences("savetoken", Context.MODE_PRIVATE).edit().putString("token", data.token).apply()
                     startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                     finish()
