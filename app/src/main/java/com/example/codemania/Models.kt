@@ -18,7 +18,7 @@ data class ModelUser(
     val firstname: String,
     val lastname: String,
     val patronymic: String,
-    val avatar: String
+    val avatar: String?
 )
 data class ModelIdentity(
     val token: String,
@@ -26,4 +26,8 @@ data class ModelIdentity(
 )
 data class ModelToken(
     val token: String
+)
+
+data class ModelError(
+    val error: String
 )

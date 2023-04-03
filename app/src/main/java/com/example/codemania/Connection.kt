@@ -2,6 +2,7 @@ package com.example.codemania
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.ColorSpace.Model
 import android.util.Log
 import android.widget.Toast
 import com.example.codemania.Connection.retrofit
@@ -22,14 +23,16 @@ object Connection {
 fun <T> Call<T>.push(onGetData: OnGetData<T>, context: Context) {
     enqueue(object: Callback<T> {
         override fun onResponse(call: Call<T>, response: Response<T>) {
-            if (response.code() == 200) {
-                if (response.body() == null) {
-                    onGetData.onGet(response.body()!!)
+            val body = response.body()
+            if (body == null) {
+                if (response.errorBody() != null) {
+                    val modelError = Gson().fromJson(response.errorBody()!!.string(), ModelError::class.java)
+                    onGetData.onError(modelError.error)
                 }else{
-                    onGetData.onError("body null")
+                    onGetData.onError("Body null")
                 }
             }else{
-                Toast.makeText(context, "Ошибка ${response.code()}", Toast.LENGTH_LONG).show()
+                onGetData.onGet(body)
             }
         }
 
