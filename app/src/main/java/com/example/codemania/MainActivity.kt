@@ -14,14 +14,13 @@ class MainActivity : AppCompatActivity() {
         activity = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activity.root)
         activity.imageView3.setOnClickListener {
-            api.signOut(ModelToken(getSharedPreferences("savetoken", Context.MODE_PRIVATE)
-                .getString("token", "no token").toString())).push(object: OnGetData<Boolean>{
+            api.signOut(ModelToken(Info.token), Info.userId).push(object: OnGetData<Boolean>{
                 override fun onGet(data: Boolean) {
                     Toast.makeText(this@MainActivity, "Вы успешно вышли из аккаунта!", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onError(error: String) {
-                    Toast.makeText(this@MainActivity, "Что-то пошло не так", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, error, Toast.LENGTH_LONG).show()
                 }
 
             }, this)

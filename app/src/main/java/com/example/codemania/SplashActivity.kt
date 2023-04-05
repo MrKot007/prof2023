@@ -7,25 +7,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.example.codemania.Connection.api
 import com.example.codemania.databinding.ActivitySplashBinding
 import kotlin.properties.Delegates
-var sh: SharedPreferences? = null
+
 class SplashActivity : AppCompatActivity() {
     private lateinit var activity: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        sh = getSharedPreferences("saveenter", Context.MODE_PRIVATE)
-        if (sh!!.getBoolean("isFirstEnter", false)) {
-            saveNotFirstEnter()
+        if (SharedPref.checkNotFirstEnter(this)) {
+            SharedPref.saveNotFirstEnter(this)
             Handler(Looper.getMainLooper()).postDelayed({
                 startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
                 finish()
             }, 1000)
         }else{
-            api.signIn(ModelAuth(getSharedPreferences("savemail", Context.MODE_PRIVATE).getString("mail", "no mail").toString(),
-            getSharedPreferences("savepassword", Context.MODE_PRIVATE).getString("password", "no password").toString()))
+            api.signIn(ModelAuth(SharedPref.getEmail(this).toString(), SharedPref.getPassword(this).toString()))
                 .push(object: OnGetData<ModelIdentity> {
                     override fun onGet(data: ModelIdentity) {
                         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
@@ -34,12 +33,10 @@ class SplashActivity : AppCompatActivity() {
 
                     override fun onError(error: String) {
                         startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+                        Log.e("splashError", error)
                     }
 
                 }, this)
         }
-    }
-    fun saveNotFirstEnter() {
-        sh!!.edit().putBoolean("isFirstEnter", false).apply()
     }
 }

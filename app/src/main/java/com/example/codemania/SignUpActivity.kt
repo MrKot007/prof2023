@@ -49,14 +49,14 @@ class SignUpActivity : AppCompatActivity() {
                     Info.firstname = data.user.firstname
                     Info.lastname = data.user.lastname
                     Info.patronymic = data.user.patronymic
-                    //Info.avatar = data.user.avatar!!
-                    getSharedPreferences("savetoken", Context.MODE_PRIVATE).edit().putString("token", data.token).apply()
+                    Info.avatar = data.user.avatar
+                    SharedPref.saveToken(this@SignUpActivity, data.token)
                     startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                     finish()
                 }
 
                 override fun onError(error: String) {
-                    Toast.makeText(this@SignUpActivity, "Error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SignUpActivity, error, Toast.LENGTH_LONG).show()
                 }
 
             }, this)

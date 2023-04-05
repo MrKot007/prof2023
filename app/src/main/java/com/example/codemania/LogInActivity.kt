@@ -37,19 +37,20 @@ class LogInActivity : AppCompatActivity() {
             api.signIn(ModelAuth(email, pass)).push(object: OnGetData<ModelIdentity>{
                 override fun onGet(data: ModelIdentity) {
                     Info.token = data.token
+                    Info.userId = data.user.userId
                     Info.firstname = data.user.firstname
                     Info.lastname = data.user.lastname
                     Info.patronymic = data.user.patronymic
-                    //Info.avatar = data.user.avatar!!
-                    getSharedPreferences("savetoken", Context.MODE_PRIVATE).edit().putString("token", data.token).apply()
-                    getSharedPreferences("savemail", Context.MODE_PRIVATE).edit().putString("mail", email).apply()
-                    getSharedPreferences("savepassword", Context.MODE_PRIVATE).edit().putString("pass", pass).apply()
+                    Info.avatar = data.user.avatar
+                    SharedPref.setEmail(this@LogInActivity, email)
+                    SharedPref.setPassword(this@LogInActivity, pass)
+                    SharedPref.saveToken(this@LogInActivity, data.token)
                     startActivity(Intent(this@LogInActivity, MainActivity::class.java))
                     finish()
                 }
 
                 override fun onError(error: String) {
-                    Toast.makeText(this@LogInActivity, "error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LogInActivity, error, Toast.LENGTH_LONG).show()
                 }
 
             },this)
