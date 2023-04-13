@@ -35,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-            if (bio[3] != "Мужской" && bio[3] != "Женский") {
+            if (bio[3] != "Мужской" || bio[3] != "Женский") {
                 Toast.makeText(this@SignUpActivity, "Пол указан неверно!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
